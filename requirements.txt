@@ -1,0 +1,4 @@
+python-dotenv==0.10.1
+requests==2.20.1
+beautifulsoup4==4.6.3
+reportlab==3.4.0
