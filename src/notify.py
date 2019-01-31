@@ -2,6 +2,8 @@
 import os
 from .gmail import Gmail
 
+curdir = os.path.dirname(__file__)
+
 
 def get_message(all_results):
     if len(all_results) == 0:
@@ -49,7 +51,7 @@ def notify_result(csv_file):
     print(msg)
 
     print('Sending email...')
-    with open('mail.list') as fp:
+    with open(os.path.join(curdir, 'mail.list')) as fp:
         emails = [x.strip() for x in fp.readlines() if x.strip()]
     # end with
 

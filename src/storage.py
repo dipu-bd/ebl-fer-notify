@@ -2,7 +2,8 @@
 import os
 from datetime import date
 
-data_folder = 'data'
+curdir = os.path.dirname(__file__)
+data_folder = os.path.join(curdir, 'data')
 csv_file = os.path.join(data_folder, 'usd.csv')
 fieldnames = ['date', 'rate']
 

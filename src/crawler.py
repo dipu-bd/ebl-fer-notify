@@ -5,7 +5,9 @@ import requests
 from bs4 import BeautifulSoup
 
 website = 'https://www.ebl.com.bd/home/Foreign_Exchange_Rates'
-pdf_folder = os.path.join('data', 'ebl')
+
+curdir = os.path.dirname(__file__)
+pdf_folder = os.path.join(curdir, 'data', 'ebl')
 
 
 def download_latest():
