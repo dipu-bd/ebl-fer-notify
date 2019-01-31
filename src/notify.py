@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import os
+import requests
 from .gmail import Gmail
 
-curdir = os.path.dirname(__file__)
+mail_list_url = 'https://raw.githubusercontent.com/dipu-bd/ebl-fer-notify/master/mail.list'
 
 
 def get_message(all_results):
@@ -50,10 +51,9 @@ def notify_result(csv_file):
     msg = get_message(all_results)
     print(msg)
 
-    print('Sending email...')
-    with open(os.path.join(curdir, 'mail.list')) as fp:
-        emails = [x.strip() for x in fp.readlines() if x.strip()]
-    # end with
+    print('Getting email list...')
+    emails = requests.get(mail_list_url).text
+    emails = [x.strip() for x in emails.split('\n') if x.strip()]
 
     user = os.getenv('GMAIL_USER', '')
     password = os.getenv('GMAIL_PASSWORD', '')
@@ -61,7 +61,7 @@ def notify_result(csv_file):
     print('Opening SMTP SSL server...')
     mailer = Gmail(user, password)
     for email in emails:
+        print('Sending email to %s' % email)
         mailer.send_message(email, 'EBL Exchange Rate', msg)
-        print('Email sent to %s' % email)
     # end for
 # end def
