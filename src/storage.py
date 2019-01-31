@@ -17,7 +17,7 @@ def sync_result(result):
     # end if
 
     today = date.today().isoformat()
-    if len(lines) and lines[0].split('\t')[1].strip() != today:
+    if len(lines) == 0 or lines[0].split('\t')[1].strip() != today:
         lines = ['%s\t%s\n' % (result, today)] + lines
     # end if
 
