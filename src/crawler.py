@@ -3,11 +3,7 @@ import os
 from datetime import date
 import requests
 from bs4 import BeautifulSoup
-
-website = 'https://www.ebl.com.bd/home/Foreign_Exchange_Rates'
-
-curdir = os.path.dirname(__file__)
-pdf_folder = os.path.join(curdir, 'data', 'ebl')
+from .configs import *
 
 
 def download_latest():

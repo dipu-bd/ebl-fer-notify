@@ -2,8 +2,7 @@
 import os
 import requests
 from .gmail import Gmail
-
-mail_list_url = 'https://raw.githubusercontent.com/dipu-bd/ebl-fer-notify/master/mail.list'
+from .configs import *
 
 
 def get_message(all_results):

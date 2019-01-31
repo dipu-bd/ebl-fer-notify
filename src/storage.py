@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 from datetime import date
-
-data_folder = os.path.join(os.curdir, 'data')
-csv_file = os.path.join(data_folder, 'usd.csv')
-fieldnames = ['date', 'rate']
+from .configs import *
 
 
 def sync_result(result):
