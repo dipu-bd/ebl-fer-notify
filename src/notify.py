@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
-from smtplib import SMTP_SSL
+from .gmail import Gmail
 
 
 def get_message(all_results):
@@ -55,18 +55,11 @@ def notify_result(csv_file):
 
     user = os.getenv('GMAIL_USER', '')
     password = os.getenv('GMAIL_PASSWORD', '')
-    mail_fmt = 'From: %s\nTo: %s\nSubject: %s\n\n%s'
-    subject = 'EBL Foreign Exchange Rate Notification'
 
-    print('Opening SMTP SSL server')
-    with SMTP_SSL('smtp.gmail.com', 465) as server:
-        print('Logging in...')
-        server.login(user, password)
-        for email in emails:
-            print('Seding email to %s' % email)
-            email_text = mail_fmt % (user, email, subject, msg)
-            server.sendmail(user, email, email_text)
-            print('Email sent to %s' % email)
-        # end for
-    # end with
+    print('Opening SMTP SSL server...')
+    mailer = Gmail(user, password)
+    for email in emails:
+        mailer.send_message(email, 'EBL Exchange Rate', msg)
+        print('Email sent to %s' % email)
+    # end for
 # end def
